@@ -1,0 +1,27 @@
+const {Router} = require ('express')
+const 
+{    
+    getAllAlertXUsers,
+    getAlertXUser,
+    getAlertXUsers,
+    createAlertXUser,
+    deleteAlertXUser,
+    updateAlertXUser
+} = require('../controllers/alertsXusers.controller')
+
+
+const router= Router();
+
+router.get('/alertaxusuarios', getAllAlertXUsers)
+
+router.get('/alertaxusuarios/:id/detail',getAlertXUser)
+
+router.get('/alertaxusuarios/:id',getAlertXUsers)
+
+router.post('/alertaxusuarios',createAlertXUser)
+
+router.delete('/alertaxusuarios/:id',deleteAlertXUser)
+
+router.put('/alertaxusuarios/:id',updateAlertXUser)
+
+module.exports = router;
