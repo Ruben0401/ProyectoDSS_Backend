@@ -1,6 +1,7 @@
 const express=require('express');
 const cors = require('cors');
 const morgan=require('morgan')
+const {port} = require('./config')
 
 const alertsroutes = require('./routes/alerts.routes')
 const alertsXusersroutes = require('./routes/alertsXusers.routes')
@@ -48,5 +49,6 @@ app.use((err,req,res,next) =>{
 
 })
 
-app.listen(80)
-console.log('Server on Port 80')
+app.listen(port, ()=>{
+    console.log(`Running nodejs app on port: ${port}`)
+})
