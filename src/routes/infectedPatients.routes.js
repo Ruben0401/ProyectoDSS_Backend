@@ -3,6 +3,7 @@ const
 {    
     getAllInfectedPatients,
     getInfectedPatient,
+    getInfectedPatientMobile,
     createInfectedPatient,
     deleteInfectedPatient,
     updateInfectedPatient
@@ -14,6 +15,8 @@ const router= Router();
 router.get('/infectados', getAllInfectedPatients)
 
 router.get('/infectados/:id',getInfectedPatient)
+
+router.get('/infectados/:id/p',getInfectedPatientMobile)
 
 router.post('/infectados',createInfectedPatient)
 
