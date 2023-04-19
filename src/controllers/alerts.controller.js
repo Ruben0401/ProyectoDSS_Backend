@@ -42,7 +42,7 @@ const createAlert = async (req,res,next)=>{
 
     try {
         const  result = await pool.query
-        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1, to_timestamp(${pgFormatDate(Date.now())} / 1000.0)) RETURNING *`,
+        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,${pgFormatDate(Date.now())}) RETURNING *`,
         [
             descripcion
         ]
