@@ -39,10 +39,13 @@ function pgFormatDate(date) {
 
 const createAlert = async (req,res,next)=>{
     const { descripcion} = req.body
-
+    var fechaFormat = new Date(new Date().toUTCString()).getTime()
+    const fechanew=pgFormatDate(Date.now())
+    console.log(fechaFormat)
+    console.log(fechanew)
     try {
         const  result = await pool.query
-        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,${pgFormatDate(Date.now())}) RETURNING *`,
+        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,${fechaFormat}) RETURNING *`,
         [
             descripcion
         ]
