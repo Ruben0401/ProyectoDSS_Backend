@@ -39,7 +39,7 @@ function pgFormatDate(date) {
 
 const createAlert = async (req,res,next)=>{
     const { descripcion} = req.body
-    var fechaFormat = new Date(new Date().toUTCString()).getTime()
+    var fechaFormat = new Date(new Date().toLocaleString()).getTime()
     const fechanew=pgFormatDate(Date.now())
     console.log(fechaFormat)
     console.log(fechanew)
