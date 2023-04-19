@@ -45,7 +45,7 @@ const createAlert = async (req,res,next)=>{
     console.log(fechanew)
     try {
         const  result = await pool.query
-        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,${fechaFormat}) RETURNING *`,
+        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,${fechaFormat}/1000.0) RETURNING *`,
         [
             descripcion
         ]
