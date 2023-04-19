@@ -27,13 +27,13 @@ const getAlert = async (req,res,next)=>{
 }
 
 const createAlert = async (req,res,next)=>{
-    const { descripcion, fecha} = req.body
+    const { descripcion} = req.body
 
     try {
         const  result = await pool.query
-        ("INSERT INTO alerta (descripcion, fecha) VALUES ($1, $2) RETURNING *",
+        (`INSERT INTO alerta (descripcion, fecha) VALUES ($1, to_timestamp(${Date.now()} / 1000.0)) RETURNING *`,
         [
-            descripcion, fecha
+            descripcion
         ]
         );
         res.json(result.rows[0])
