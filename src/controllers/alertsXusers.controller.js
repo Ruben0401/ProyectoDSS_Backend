@@ -78,14 +78,14 @@ const createAlertXUserAll = async (req,res,next)=>{
             resultAlert.rows[0].id_alerta, dni_pS, latitudS, longitudS
         ]
         );
-        clg(resultS.rows[0])
+        console.log(resultS.rows[0])
         const  resultI = await pool.query
         ("INSERT INTO alertaxusuario (id_alerta, dni_p, latitud, longitud) VALUES ($1, $2,$3, $4) RETURNING *",
         [
             resultAlert.rows[0].id_alerta, dni_pI, latitudI, longitudI
         ]
         );
-        clg(resultI.rows[0])
+        console.log(resultI.rows[0])
         res.json()
         
     } catch (error) {
