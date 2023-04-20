@@ -5,6 +5,7 @@ const
     getAlertXUser,
     getAlertXUsers,
     createAlertXUser,
+    createAlertXUserAll,
     deleteAlertXUser,
     updateAlertXUser
 } = require('../controllers/alertsXusers.controller')
@@ -19,6 +20,8 @@ router.get('/alertaxusuarios/:id/detail',getAlertXUser)
 router.get('/alertaxusuarios/:id',getAlertXUsers)
 
 router.post('/alertaxusuarios',createAlertXUser)
+
+router.post('/alertaxusuariosall',createAlertXUserAll)
 
 router.delete('/alertaxusuarios/:id',deleteAlertXUser)
 
