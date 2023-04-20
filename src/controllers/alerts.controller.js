@@ -30,7 +30,9 @@ const getAlert = async (req,res,next)=>{
 
 const createAlert = async (req,res,next)=>{
     const { descripcion} = req.body
-    var fechaFormat = new Date(new Date().toLocaleString()).getTime()
+    
+    var fechaFormat = new Date().getTime()
+    console.log(fechaFormat)
     try {
         const  result = await pool.query
         (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,to_timestamp(${fechaFormat}/1000.0)) RETURNING *`,

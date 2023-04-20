@@ -62,8 +62,7 @@ const createAlertXUser = async (req,res,next)=>{
 
 const createAlertXUserAll = async (req,res,next)=>{
     const { descripcion,dni_pI,latitudI,longitudI,dni_pS, latitudS, longitudS} = req.body
-    var fechaFormat = new Date(new Date().toLocaleString()).getTime()
-    console.log(descripcion)
+    var fechaFormat = new Date().getTime()
     try {
         const  resultAlert = await pool.query
         (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,to_timestamp(${fechaFormat}/1000.0)) RETURNING *`,
@@ -71,23 +70,13 @@ const createAlertXUserAll = async (req,res,next)=>{
             descripcion
         ]
         );
-        console.log(resultAlert.rows[0].id_alerta)
-        const  resultS = await pool.query
-        ("INSERT INTO alertaxusuario (id_alerta, dni_p, latitud, longitud) VALUES ($1, $2,$3, $4) RETURNING *",
+        const  resultAll = await pool.query
+        ("INSERT INTO alertaxusuario (id_alerta, dni_p, latitud, longitud) VALUES ($1, $2,$3, $4), ($5, $6,$7, $8) RETURNING *;",
         [
-            resultAlert.rows[0].id_alerta, dni_pS, latitudS, longitudS
+            resultAlert.rows[0]["id_alerta"], dni_pS, latitudS, longitudS,resultAlert.rows[0].id_alerta, dni_pI, latitudI, longitudI
         ]
         );
-        console.log(resultS.rows[0])
-        const  resultI = await pool.query
-        ("INSERT INTO alertaxusuario (id_alerta, dni_p, latitud, longitud) VALUES ($1, $2,$3, $4) RETURNING *",
-        [
-            resultAlert.rows[0].id_alerta, dni_pI, latitudI, longitudI
-        ]
-        );
-        console.log(resultI.rows[0])
-        res.json()
-        
+        res.json("bien hecho")
     } catch (error) {
         next(error)
         
