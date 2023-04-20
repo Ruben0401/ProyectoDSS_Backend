@@ -26,23 +26,11 @@ const getAlert = async (req,res,next)=>{
     }
 }
 
-function pgFormatDate(date) {
-    /* Via http://stackoverflow.com/questions/3605214/javascript-add-leading-zeroes-to-date */
-    function zeroPad(d) {
-      return ("0" + d).slice(-2)
-    }
-  
-    var parsed = new Date(date)
-  
-    return [parsed.getUTCFullYear(), zeroPad(parsed.getMonth() + 1), zeroPad(parsed.getDate()), zeroPad(parsed.getHours()), zeroPad(parsed.getMinutes()), zeroPad(parsed.getSeconds())].join(" ");
-  }
+
 
 const createAlert = async (req,res,next)=>{
     const { descripcion} = req.body
     var fechaFormat = new Date(new Date().toLocaleString()).getTime()
-    const fechanew=pgFormatDate(Date.now())
-    console.log(fechaFormat)
-    console.log(fechanew)
     try {
         const  result = await pool.query
         (`INSERT INTO alerta (descripcion, fecha) VALUES ($1,to_timestamp(${fechaFormat}/1000.0)) RETURNING *`,
