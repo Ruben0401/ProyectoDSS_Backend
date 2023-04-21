@@ -4,6 +4,7 @@ const
     getAllPatients,
     getAllPatientsD,
     getPatient,
+    checkEmailPatient,
     getPatientlog,
     registerPatient,
     deletePatient,
@@ -19,6 +20,8 @@ router.get('/pacientes', getAllPatients)
 router.get('/pacientesD/:dni',getAllPatientsD)
 
 router.get('/pacientes/:dni',getPatient)
+router.post('/pacientes/email',checkEmailPatient)
+
 
 router.post('/pacientes/log', getPatientlog)
 

@@ -41,6 +41,21 @@ const getPatient = async (req,res,next)=>{
     }
 }
 
+const checkEmailPatient = async (req,res,next)=>{
+    const {correo} = req.body
+    try {
+        const result = await pool.query("Select * From paciente where correo = $1" , [correo])
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message:'no encontrado'
+            })
+        }
+        res.json(result.rows[0])
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getPatientlog = async (req,res,next)=>{
     const {correo, password_p} = req.body
     try {
@@ -146,6 +161,7 @@ module.exports = {
     getAllPatients,
     getAllPatientsD,
     getPatient,
+    checkEmailPatient,
     getPatientlog,
     registerPatient,
     deletePatient,
