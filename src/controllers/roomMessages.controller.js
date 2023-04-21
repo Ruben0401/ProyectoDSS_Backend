@@ -10,6 +10,27 @@ const getAllRoomMessages = async (req,res,next)=>{
     }
 }
 
+const getAllRoomMessagesPatients = async (req,res,next)=>{
+    const {dni} =  req.params
+    try {
+        const result = await pool.query("Select * From salamensaje where dni_p = $1" , [dni])
+        res.json(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
+
+const getAllRoomMessagesDoctors = async (req,res,next)=>{
+    const {dni} =  req.params
+    try {
+        const result = await pool.query("Select * From salamensaje where dni_d = $1" , [dni])
+        res.json(result.rows)
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 const getRoomMessage = async (req,res,next)=>{
     const {id} =  req.params
     try {
@@ -84,6 +105,8 @@ const updateRoomMessage = async (req,res,next)=>{
 
 module.exports = {
     getAllRoomMessages,
+    getAllRoomMessagesPatients,
+    getAllRoomMessagesDoctors,
     getRoomMessage,
     createRoomMessage,
     deleteRoomMessage,

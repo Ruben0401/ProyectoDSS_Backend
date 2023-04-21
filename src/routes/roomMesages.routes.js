@@ -2,6 +2,8 @@ const {Router} = require ('express')
 const 
 {    
     getAllRoomMessages,
+    getAllRoomMessagesPatients,
+    getAllRoomMessagesDoctors,
     getRoomMessage,
     createRoomMessage,
     deleteRoomMessage,
@@ -12,6 +14,10 @@ const
 const router= Router();
 
 router.get('/salamensajes', getAllRoomMessages)
+
+router.get('/salamensajes/:dni/pacientes', getAllRoomMessagesPatients)
+
+router.get('/salamensajes/:dni/doctores', getAllRoomMessagesDoctors)
 
 router.get('/salamensajes/:id',getRoomMessage)
 
