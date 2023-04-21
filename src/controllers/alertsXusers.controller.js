@@ -70,7 +70,7 @@ const createAlertXUserAll = async (req,res,next)=>{
             descripcion
         ]
         );
-        const resultall = await pool.query
+        await pool.query
         ("INSERT INTO alertaxusuario (id_alerta, dni_p, latitud, longitud) VALUES ($1, $2,$3, $4), ($5, $6,$7, $8) RETURNING *;",
         [
             resultAlert.rows[0]["id_alerta"], dni_pS, latitudS, longitudS,resultAlert.rows[0].id_alerta, dni_pI, latitudI, longitudI
