@@ -25,6 +25,6 @@ router.delete('/infectados/:id',deleteInfectedPatient)
 
 router.put('/infectados/:id',updateInfectedPatient)
 
-router.put('/infectados/loc',updateInfectedPatientLocation)
+router.put('/infectados/send/location',updateInfectedPatientLocation)
 
 module.exports = router;
