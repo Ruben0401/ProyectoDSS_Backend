@@ -99,6 +99,25 @@ const updateInfectedPatient = async (req,res,next)=>{
         }
 }
 
+const updateInfectedPatientLocation = async (req,res,next)=>{
+
+    try {
+        const {  latitud, longitud,dni_p}=req.body
+        const result = await pool.query(
+        "UPDATE infectadopaciente SET latitud=$1, longitud=$2 WHERE dni_p =$3 RETURNING *",
+        [  latitud, longitud,dni_p]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message:'no encontrado'
+            })
+        }
+        return res.json(result.rows[0])     
+
+        } catch (error) {
+            next(error)  
+        }
+}
+
 
 module.exports = {
     getAllInfectedPatients,
@@ -106,6 +125,7 @@ module.exports = {
     getInfectedPatientMobile,
     createInfectedPatient,
     deleteInfectedPatient,
-    updateInfectedPatient
+    updateInfectedPatient,
+    updateInfectedPatientLocation
 
 }

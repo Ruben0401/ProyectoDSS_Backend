@@ -6,7 +6,8 @@ const
     getInfectedPatientMobile,
     createInfectedPatient,
     deleteInfectedPatient,
-    updateInfectedPatient
+    updateInfectedPatient,
+    updateInfectedPatientLocation
 } = require('../controllers/infectedPatients.controller')
 
 
@@ -23,5 +24,7 @@ router.post('/infectados',createInfectedPatient)
 router.delete('/infectados/:id',deleteInfectedPatient)
 
 router.put('/infectados/:id',updateInfectedPatient)
+
+router.put('/infectados/location',updateInfectedPatientLocation)
 
 module.exports = router;
