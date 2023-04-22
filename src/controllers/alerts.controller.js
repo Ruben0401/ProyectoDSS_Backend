@@ -10,6 +10,21 @@ const getAllAlerts = async (req,res,next)=>{
     }
 }
 
+const getAllAlertsPatient = async (req,res,next)=>{
+    const {dni} =  req.params
+    try {
+       const result = 
+       await pool.query(
+        "SELECT * FROM alertaxusuario left join alerta on alerta.id_alerta = alertaxusuario.id_alerta" 
+       +  " left join infectadopaciente on infectadopaciente.dni_p = alertaxusuario.dni_p" 
+       +  " where infectadopaciente.estado is null and alertaxusuario.dni_p = $1"
+       +  " order by alertaxusuario.id_detallealerta asc", [dni])
+       res.json(result.rows);
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getAlert = async (req,res,next)=>{
     const {id} =  req.params
     try {
@@ -88,6 +103,7 @@ const updateAlert = async (req,res,next)=>{
 
 module.exports = {
     getAllAlerts,
+    getAllAlertsPatient,
     getAlert,
     createAlert,
     deleteAlert,

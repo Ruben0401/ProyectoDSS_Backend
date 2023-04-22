@@ -2,6 +2,7 @@ const {Router} = require ('express')
 const 
 {    
     getAllAlerts,
+    getAllAlertsPatient,
     getAlert,
     createAlert,
     deleteAlert,
@@ -12,6 +13,8 @@ const
 const router= Router();
 
 router.get('/alertas', getAllAlerts)
+
+router.get('/alertas/:dni/patient', getAllAlertsPatient)
 
 router.get('/alertas/:id',getAlert)
 
