@@ -43,6 +43,21 @@ const getDoctorlog = async (req,res,next)=>{
     }
 }
 
+const checkEmailDoctor = async (req,res,next)=>{
+    const {correo} = req.body
+    try {
+        const result = await pool.query("Select * From doctor where correo = $1" , [correo])
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message:'no encontrado'
+            })
+        }
+        res.json(result.rows[0])
+    } catch (error) {
+        next(error)
+    }
+}
+
 const registerDoctor = async (req,res,next)=>{
     const {dni_d, nombres, apellidos, fecha_nacimiento, sexo, edad, telefono, correo, especialidad, password_d} = req.body
 
@@ -103,6 +118,7 @@ module.exports = {
     getAllDoctors,
     getDoctor,
     getDoctorlog,
+    checkEmailDoctor,
     registerDoctor,
     deleteDoctor,
     updateDoctor

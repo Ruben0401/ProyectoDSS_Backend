@@ -4,6 +4,7 @@ const
     getAllDoctors,
     getDoctor,
     getDoctorlog,
+    checkEmailDoctor,
     registerDoctor,
     deleteDoctor,
     updateDoctor
@@ -17,6 +18,7 @@ router.get('/doctores', getAllDoctors)
 router.post('/doctores/log', getDoctorlog)
 
 router.get('/doctores/:dni',getDoctor)
+router.post('/doctores/email',checkEmailDoctor)
 
 router.post('/doctores',registerDoctor)
 
